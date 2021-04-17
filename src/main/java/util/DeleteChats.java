@@ -17,8 +17,10 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DeleteChats {
 	private static WebDriver driver;
+	static String dir= "C:\\Users\\rites\\AppData\\Local\\Google\\Chrome\\User Data";
+	static String chatURL = "https://teams.microsoft.com/_?culture=en-in&country=IN&lm=deeplink&lmsrc=NeutralHomePageWeb&cmpid=WebSignIn#/conversations/19:meeting_ZTlkNjBlZDAtZDQ0YS00MzkzLWI4MWQtNWM5ODI2MWIzYmVi@thread.v2?ctx=chat";
+	static String username = "Ritesh Kawadkar";
 	
-
 	public static void main(String[] args) throws FindFailed, InterruptedException {
 		// TODO Auto-generated method stub
 		checkLoginPageURL();
@@ -29,26 +31,21 @@ public class DeleteChats {
 		WebDriverManager.chromedriver().setup();
 		
 		ChromeOptions options = new ChromeOptions();		
-        String dir= "C:\\Users\\rites\\AppData\\Local\\Google\\Chrome\\User Data";
-		options.addArguments("user-data-dir="+dir);
+        
+		options.addArguments("user-data-dir="+ dir);
 		driver = new ChromeDriver(options);
 		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.navigate().to("https://teams.microsoft.com/_?culture=en-in&country=IN&lm=deeplink&lmsrc=NeutralHomePageWeb&cmpid=WebSignIn#/conversations/19:meeting_MmNjZjVjYjItMTk0MS00OTk1LWI0MjAtODNiNTZlNjExZDBi@thread.v2?ctx=chat");
+		driver.navigate().to(chatURL);
 		
 		//get list of all messages
-		List<WebElement> allMessageList = driver.findElements(By.xpath("//div[contains(text(), 'Ritesh Kawadkar')]//parent::div//parent::div//parent::div[@id='messageBody']"));
-		
-		
-		
-		
-		
-		
+		List<WebElement> allMessageList = driver.findElements(By.xpath("//div[contains(text(), '" + username + "')]//parent::div//parent::div//parent::div[@id='messageBody']"));
+
 
 		int i=1;
 		//list of id 
-		List<WebElement> ids= driver.findElements(By.xpath("//div[contains(text(), 'Ritesh Kawadkar')]//parent::div//parent::div//parent::div[@id='messageBody']/parent::div/parent::div"));
+		List<WebElement> ids= driver.findElements(By.xpath("//div[contains(text(), '" + username + "')]//parent::div//parent::div//parent::div[@id='messageBody']/parent::div/parent::div"));
 		for (WebElement cids : ids) {
 			String id = cids.getAttribute("id").replace("m", "");
 			System.out.println(i + " = " + id);
@@ -76,7 +73,7 @@ public class DeleteChats {
 			
 			
 			//get id
-			chatId = driver.findElement(By.xpath("//div[contains(text(), 'Ritesh Kawadkar')]//parent::div//parent::div//parent::div[@id='messageBody']/parent::div/parent::div"));
+			chatId = driver.findElement(By.xpath("//div[contains(text(), '" + username + "')]//parent::div//parent::div//parent::div[@id='messageBody']/parent::div/parent::div"));
 			String id = chatId.getAttribute("id").replace("m", "");
 			System.out.println(id);
 			
@@ -88,12 +85,12 @@ public class DeleteChats {
 			
 			if(Util.isElementPresent(driver, "//*[@id='messageActions']/message-actions")) {
 				driver.findElement(By.xpath("//*[@id='messageActions']/message-actions")).click();
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 			}
 			
 			if(Util.isElementPresent(driver, "//*[@id='messageActionDropdown']/ul/li[3]/button/span")) {
 				driver.findElement(By.xpath("//*[@id='messageActionDropdown']/ul/li[3]/button/span")).click();
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 			}
 			
 			
