@@ -1,6 +1,6 @@
 # MicrosoftTeams
 
-Update below with your details in DeleteChats.java
+Update below with your details in [DeleteChats.java](https://github.com/riteshkawadkar/MicrosoftTeams/blob/master/src/main/java/util/DeleteChats.java)
 
 Type chrome://version to get the profilePath 
 static String profilePath= "C:\\Users\\rites\\AppData\\Local\\Google\\Chrome\\User Data";
