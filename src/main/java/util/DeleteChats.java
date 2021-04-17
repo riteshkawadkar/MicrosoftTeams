@@ -52,13 +52,15 @@ public class DeleteChats {
 			i++;
 		}
 		
+		/*
+		
 		for (WebElement chatBubble : allMessageList) {
 			
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", chatBubble);
 			Thread.sleep(2000); 
 			Util.highlightElement(driver, chatBubble);
 		}
-		
+		*/
 		
 		WebElement chatId; 
 		WebElement deletedChatBubble;
@@ -97,8 +99,9 @@ public class DeleteChats {
 			try {
 				//confirm deleteion 
 				if(Util.isElementPresent(driver, "//*[starts-with(@id,'deleted-message-" + id + "')]")) {
+					deletedChatBubble = driver.findElement(By.xpath("//*[starts-with(@id,'deleted-message-" + id + "')]"));
 					System.out.println(id + " - Deleted Succesfully");
-					
+					deletedChatBubble.click();
 					
 					
 				}
