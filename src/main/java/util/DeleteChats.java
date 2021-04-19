@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,8 +18,10 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DeleteChats {
 	private static WebDriver driver;
-	static String dir= "C:\\Users\\rites\\AppData\\Local\\Google\\Chrome\\User Data";
-	static String chatURL = "https://teams.microsoft.com/_?culture=en-in&country=IN&lm=deeplink&lmsrc=NeutralHomePageWeb&cmpid=WebSignIn#/conversations/19:meeting_ZTlkNjBlZDAtZDQ0YS00MzkzLWI4MWQtNWM5ODI2MWIzYmVi@thread.v2?ctx=chat";
+	static String profilePath= "C:\\Users\\rites\\AppData\\Local\\Google\\Chrome\\User Data";
+	//static String chatURL = "https://teams.microsoft.com/_?culture=en-in&country=IN&lm=deeplink&lmsrc=NeutralHomePageWeb&cmpid=WebSignIn#/conversations/19:meeting_ZTlkNjBlZDAtZDQ0YS00MzkzLWI4MWQtNWM5ODI2MWIzYmVi@thread.v2?ctx=chat";
+	static String chatURL = "https://teams.microsoft.com/_?culture=en-in&country=IN&lm=deeplink&lmsrc=NeutralHomePageWeb&cmpid=WebSignIn#/conversations/19:meeting_MjBmNjkxOGMtOGU2ZC00ZmMwLWFkMTYtNmIxZDg0M2FiZDNm@thread.v2?ctx=chat";
+
 	static String username = "Ritesh Kawadkar";
 	
 	public static void main(String[] args) throws FindFailed, InterruptedException {
@@ -32,12 +35,14 @@ public class DeleteChats {
 		
 		ChromeOptions options = new ChromeOptions();		
         
-		options.addArguments("user-data-dir="+ dir);
+		options.addArguments("user-data-dir="+ profilePath);
 		driver = new ChromeDriver(options);
 		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.navigate().to(chatURL);
+		
+	
 		
 		//get list of all messages
 		List<WebElement> allMessageList = driver.findElements(By.xpath("//div[contains(text(), '" + username + "')]//parent::div//parent::div//parent::div[@id='messageBody']"));
@@ -52,15 +57,17 @@ public class DeleteChats {
 			i++;
 		}
 		
-		/*
 		
+		/*
 		for (WebElement chatBubble : allMessageList) {
 			
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", chatBubble);
 			Thread.sleep(2000); 
 			Util.highlightElement(driver, chatBubble);
 		}
+		
 		*/
+	
 		
 		WebElement chatId; 
 		WebElement deletedChatBubble;
@@ -104,6 +111,9 @@ public class DeleteChats {
 					deletedChatBubble.click();
 					
 					
+				}else {
+					System.out.println(id + " - Unkown");
+	
 				}
 				
 			} catch (Exception e) {
@@ -116,12 +126,19 @@ public class DeleteChats {
 			
 			
 		}
-		
 		driver.quit();
 		
 		
 		
 		
+		
+		
+		
+		
 	}
+
+	
+	
+	
 
 }
