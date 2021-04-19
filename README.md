@@ -1,6 +1,6 @@
 # MicrosoftTeams
 
-Update below with your details in [DeleteChats.java](https://github.com/riteshkawadkar/MicrosoftTeams/blob/master/src/main/java/util/DeleteChats.java)
+Update below with your details in [DeleteVisibleChatAndScrollUp.java](https://github.com/riteshkawadkar/MicrosoftTeams/blob/master/src/main/java/util/DeleteVisibleChatAndScrollUp.java)
 
 ## Profile Path
 Type chrome://version to get the profilePath 
